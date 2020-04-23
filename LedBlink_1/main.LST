@@ -1,0 +1,151 @@
+ARM COMPILER V2.41,  main                                                                  19/04/20  17:26:18  PAGE 1   
+
+
+ARM COMPILER V2.41, COMPILATION OF MODULE main
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\ARM\BIN\CA.exe main.c THUMB BROWSE DEBUG TABS(4) 
+
+stmt  level    source
+
+    1          /* program for led */
+    2          
+    3          #include<stdio.h>
+    4          #include<lpc213x.h>
+    5          void delay ();
+    6          
+    7          
+    8          void main()
+    9          {
+   10   1          PINSEL0=0x00000000;  
+   11   1          IO0DIR=0xffffffff;
+   12   1          while(1)
+   13   1          {
+   14   2          IO0CLR=0xffffffff;  
+   15   2          delay ();   
+   16   2          IO0SET=0xffffffff;
+   17   2          delay ();
+   18   2          IO0CLR=0xffffffff;
+   19   2      
+   20   2          }
+   21   1      }
+   22          
+   23          void delay ()
+   24          {
+   25   1           unsigned int i,j;
+   26   1      
+   27   1           for(i=0;i<500;i++)
+   28   1           {
+   29   2              for(j=0;j<5000;j++)
+   30   2              {
+   31   3              }
+   32   2           }
+   33   1      } 
+   34          
+   35          
+   36          /*
+   37          void delay (unsigned long wait)
+   38          {
+   39              T0TCR=0x1;
+   40              T0PR=0x3B;
+   41              while(T0TC <=wait)
+   42           {
+   43           }
+   44              T0TC=0;
+   45              T0TCR=0;
+   46          } */
+   47          
+   48           ARM COMPILER V2.41,  main                                                                  19/04/20  17:26:18  PAGE 2   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+
+*** EXTERNALS:
+ EXTERN NUMBER (__startup)
+
+
+
+*** PUBLICS:
+ PUBLIC         delay?T
+ PUBLIC         main
+
+
+
+*** CODE SEGMENT '?PR?main?main':
+    8: void main()
+ 00000000  B500      PUSH        {LR}
+   10:     PINSEL0=0x00000000;  
+ 00000002  2100      MOV         R1,#0x0
+ 00000004  4800      LDR         R0,=0xE002C000
+ 00000006  6001      STR         R1,[R0,#0x0]
+   11:     IO0DIR=0xffffffff;
+ 00000008  4800      LDR         R1,=0xFFFFFFFF
+ 0000000A  4800      LDR         R0,=0xE0028008
+ 0000000C  6001      STR         R1,[R0,#0x0]
+   12:     while(1)
+ 0000000E          L_3:
+   14:     IO0CLR=0xffffffff;  
+ 0000000E  4800      LDR         R4,=0xFFFFFFFF
+ 00000010  4800      LDR         R0,=0xE002800C
+ 00000012  6004      STR         R4,[R0,#0x0]
+   15:     delay ();   
+ 00000014  F7FF      BL          delay?T  ; T=0x0001  (1)
+ 00000016  FFF4      BL          delay?T  ; T=0x0001  (2)
+   16:     IO0SET=0xffffffff;
+ 00000018  4800      LDR         R0,=0xE0028004
+ 0000001A  6004      STR         R4,[R0,#0x0]
+   17:     delay ();
+ 0000001C  F7FF      BL          delay?T  ; T=0x0001  (1)
+ 0000001E  FFF0      BL          delay?T  ; T=0x0001  (2)
+   18:     IO0CLR=0xffffffff;
+ 00000020  4800      LDR         R0,=0xE002800C
+ 00000022  6004      STR         R4,[R0,#0x0]
+   20:     }
+ 00000024  E7F3      B           L_3  ; T=0x0000000E
+   21: }
+ 00000026  BC08      POP         {R3}
+ 00000028  4718      BX          R3
+ 0000002A          ENDP ; 'main'
+
+
+*** CODE SEGMENT '?PR?delay?T?main':
+   24: {
+ 00000000            ; SCOPE-START
+   27:      for(i=0;i<500;i++)
+ 00000000  2000      MOV         R0,#0x0
+ 00000002  ---- Variable 'i' assigned to Register 'R0' ----
+   29:          for(j=0;j<5000;j++)
+ 00000002          L_14:
+ 00000002  2100      MOV         R1,#0x0
+ 00000004  ---- Variable 'j' assigned to Register 'R1' ----
+   31:         }
+ 00000004          L_10:
+ 00000004  3101      ADD         R1,#0x1
+ 00000006  1C0A      MOV         R2,R1 ; j
+ 00000008  4800      LDR         R3,=0x1388
+ 0000000A  429A      CMP         R2,R3 ; j
+ 0000000C  D3FA      BCC         L_10  ; T=0x00000004
+   32:      }
+ 0000000E  3001      ADD         R0,#0x1
+ 00000010  1C01      MOV         R1,R0 ; i
+ 00000012  4A7D      LDR         R2,=0x1F4
+ARM COMPILER V2.41,  main                                                                  19/04/20  17:26:18  PAGE 3   
+
+ 00000014  4291      CMP         R1,R2 ; i
+ 00000016  D3F4      BCC         L_14  ; T=0x00000002
+ 00000018            ; SCOPE-END
+   33: } 
+ 00000018  4770      BX          R14
+ 0000001A          ENDP ; 'delay?T'
+
+
+
+Module Information          Static
+----------------------------------
+  code size            =    ------
+  data size            =    ------
+  const size           =    ------
+End of Module Information.
+
+
+ARM COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
